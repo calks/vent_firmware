@@ -1,0 +1,4 @@
+syntax: glob
+power/Release/*
+server/Release/*
+server.atsuo
