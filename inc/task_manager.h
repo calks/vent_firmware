@@ -13,7 +13,10 @@ class TaskManager {
 	public:
 		static void init() {
 			OCR0 = 143; // 100Hz			
-			TCCR0 = (1<<FOC0) | (1<<WGM01) | (1<<CS00) | (1<<CS01) | (1<<CS02); // CTC mode, 1024 prescaler
+			TCCR0 = (1<<FOC0) | (1<<WGM01) | (1<<CS00) | (1<<CS02); // CTC mode, 1024 prescaler
+			#if defined (__AVR_ATmega128A__)
+			TCCR0 |= (1<<CS01);
+			#endif
 			TIMSK |= (1<<OCIE0); // compare interrupt
 		}
 		

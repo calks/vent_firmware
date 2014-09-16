@@ -17,14 +17,14 @@ char led_state = 0;
 
 void LEDon(void) {
 	PORTC &= ~(1<<LED);
-	led_state = 1;
-	//TaskManager::addTask(&LEDoff, 33);	
+	led_state = 1;	
+	TaskManager::addTask(&LEDoff, 50);	
 }
 
 void LEDoff(void) {	
 	PORTC |= (1<<LED);
 	led_state = 0;
-	//TaskManager::addTask(&LEDon, 35);	
+	TaskManager::addTask(&LEDon, 50);	
 }
 
 //PA1 (ADC1)
@@ -82,7 +82,7 @@ void processCommands(void) {
 
 	}
 	
-	TaskManager::addTask(&processCommands, 20);
+	TaskManager::addTask(&processCommands, 10);
 }
 
 
@@ -100,6 +100,7 @@ int main(void)
 	DDRC = 0xFF;
 
 	TaskManager::addTask(&processCommands, 10);
+	TaskManager::addTask(&LEDon, 10);
 
 	while(1) {}
 }
