@@ -91,7 +91,7 @@ int main(void)
 	
 	Console::init(14745600, 9600);
 	TaskManager::init();
-	Motor::init(125);
+	Motor::init(100);
 	ADCModule::addChannel(0, ADC_REFERENCE_VCC);
 	
 	stdout = Console::getStream();
