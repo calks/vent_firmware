@@ -14,6 +14,9 @@
 #include "../inc/lcd1602.h"
 //#include "../inc/rtl8019.h"
 
+#include "../inc/menu.h"
+
+
 
 #define ROOM_TEMP 0x01
 
@@ -125,10 +128,12 @@ int main(void)
 	
 	stdout = Console::getStream();
 
-	tempSensors::add(ROOM_TEMP, &PORTD, &DDRD, &PIND, PORTD5);
+	//tempSensors::add(ROOM_TEMP, &PORTD, &DDRD, &PIND, PORTD5);
 
-	TaskManager::addTask(&processCommands, 10);	
-	printState();
+	menu::init();
+
+	//TaskManager::addTask(&processCommands, 10);	
+	//printState();
 
 	while(1) {
 	}
