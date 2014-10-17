@@ -162,16 +162,32 @@ void printCounter(void) {
 
 void menuScreen::render(void) {
 	LCD1602::moveTo(1,1);
-	fprintf(LCD1602::getStream(), "time: %i", TaskManager::getSystemTime());
+	fprintf(LCD1602::getStream(), "Ñèñòåìíîå âğåìÿ ");
+	LCD1602::moveTo(2,1);
+	fprintf(LCD1602::getStream(), "%li             ", TaskManager::getSystemTime());
+	
+	
+	/*LCD1602::moveTo(1,1);
+	fprintf(LCD1602::getStream(), "time: %i", TaskManager::getSystemTime());*/
 	
 }
 
 
 void menuScreenTemperature::render(void) {
+	
+	int temp = tempSensors::getTemperature(0x01);
+	int temp_units = temp/16;
+	int temp_decimals = (temp*10/16)%10;
+	/*int derive = tempSensors::getTemperature(0x01, 1);
+	int derive_units = derive/16;
+	int derive_decimals = abs(derive*10/16)%10;*/
+	
+	//char degree_symbol = 248;
+	
 	LCD1602::moveTo(1,1);
-	fprintf(LCD1602::getStream(), "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎ");	
+	fprintf(LCD1602::getStream(), "Òåìïåğàòóğà     ");	
 	LCD1602::moveTo(2,1);
-	fprintf(LCD1602::getStream(), "ÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞ");
+	fprintf(LCD1602::getStream(), "%i.%i%             ", temp_units, temp_decimals);
 	
 }
 

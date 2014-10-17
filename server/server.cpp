@@ -128,7 +128,7 @@ int main(void)
 	
 	stdout = Console::getStream();
 
-	//tempSensors::add(ROOM_TEMP, &PORTD, &DDRD, &PIND, PORTD5);
+	tempSensors::add(ROOM_TEMP, &PORTD, &DDRD, &PIND, PORTD5);
 
 	menu::init();
 

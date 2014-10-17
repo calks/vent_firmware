@@ -45,7 +45,7 @@ class LCD1602 {
 		
 		static void backlightOn() {
 			PORTG |= (1 << LCD1602_BACKLIGHT);
-			printf("on %x\r\n", PING);
+		//	printf("on %x\r\n", PING);
 		}
 		
 		static void backlightOff() {
@@ -164,10 +164,10 @@ class LCD1602 {
 			PORTD &= ~(1<<LCD1602_RS);
 			while(bf) {
 				PORTG |= (1<<LCD1602_E);
-				_delay_ms(1);
+				_delay_us(1);
 				bf = PINC & 0x80;
 				PORTG &= ~(1<<LCD1602_E);
-				_delay_ms(1);
+				_delay_us(1);
 			}
 			DDRC = 0xFF;
 		}
@@ -176,9 +176,9 @@ class LCD1602 {
 			PORTG &= ~(1<<LCD1602_RW);
 			LCD1602_DATA = data;			
 			PORTG |= (1<<LCD1602_E);
-			_delay_ms(1);
+			_delay_us(1);
 			PORTG &= ~(1<<LCD1602_E);
-			_delay_ms(1);			
+			_delay_us(1);			
 		}
 	
 		static void writeInstruction(unsigned char instruction_code) {
@@ -187,6 +187,7 @@ class LCD1602 {
 		}
 	
 		static void writeData(unsigned char data) {
+			wait();
 			PORTD |= 1<<LCD1602_RS;
 			_write(data);
 		}
