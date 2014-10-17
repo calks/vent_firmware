@@ -52,11 +52,12 @@ class menu {
 			//printCounter();
 			
 			
-			menuScreen * sys_time = new menuScreen();
-			addScreen(sys_time);
 			
 			menuScreenTemperature * temp = new menuScreenTemperature();
 			addScreen(temp);
+
+			menuScreen * sys_time = new menuScreen();
+			addScreen(sys_time);
 			
 			refresh();
 		}
@@ -64,9 +65,6 @@ class menu {
 		static void setActiveScreen(menuScreen * screen) {
 			active_screen = screen;
 		}
-		
-		
-
 		
 		
 		static void addScreen(menuScreen * screen) {
@@ -77,6 +75,7 @@ class menu {
 			}
 			else {
 				screen->right_sibling = active_screen->right_sibling;
+				active_screen->right_sibling->left_sibling = screen;
 				screen->left_sibling = active_screen;
 				active_screen->right_sibling = screen;
 			}			
@@ -170,18 +169,21 @@ void menuScreen::render(void) {
 
 void menuScreenTemperature::render(void) {
 	LCD1602::moveTo(1,1);
-	fprintf(LCD1602::getStream(), "temperature");	
+	fprintf(LCD1602::getStream(), "юабцде╗фгхийклмн");	
+	LCD1602::moveTo(2,1);
+	fprintf(LCD1602::getStream(), "опярстужвьызшэщч");
+	
 }
 
 
 void menuScreen::onUserAction(unsigned char action) {
 	switch(action) {
 		case MENU_ACTION_INCREMENT:
-		menu::setActiveScreen(right_sibling);
-		break;
+			menu::setActiveScreen(right_sibling);
+			break;
 		case MENU_ACTION_DECREMENT:
-		menu::setActiveScreen(left_sibling);
-		break;
+			menu::setActiveScreen(left_sibling);
+			break;
 
 	}
 	
